@@ -126,6 +126,8 @@ components:
     rounded: "{rounded.pill}"
     border: "1px rgba(255, 255, 255, 0.18)"
     hover: "{elevation.glow}"
+    selected: "se centra completa con un recorrido de 0.55s; fija a 260px (190px en móvil), borde blanco 2px"
+    controls: "arrastre, trackpad y flechas de cristal 52px (solo escritorio); inercia al soltar"
   chip:
     height: 40px
     heightMobile: 48px
@@ -149,6 +151,7 @@ components:
     image: "contenida, radio 20px (14px en móvil)"
     controls: "cerrar 48px, flechas 48px en escritorio, contador"
     gestures: "deslizar a los lados = cambiar imagen; deslizar hacia abajo = cerrar; ← → Esc"
+    zoom: "móvil: pellizcar con dos dedos (1× a 4×) o doble toque; con zoom el dedo recorre la imagen"
   social-icon:
     size: 44px
     sizeMobile: 48px
@@ -291,6 +294,9 @@ En móvil: menú a pantalla completa con fondo aurora y enlaces en Capsule; las 
 
 Ventanas verticales de 200 px con el logotipo o nombre del proyecto sobre una aurora con sus colores y borde blanco translúcido de 1 px. En hover se ensanchan a 260 px, se iluminan con el resplandor y muestran categoría y año en Jakarta Medium 12 px. Al final de cada proyecto se repiten en miniatura (84 × 140 px).
 
+- **Selección:** al elegir un proyecto, la línea hace un recorrido rápido (0.55 s, salida suave) hacia la izquierda o la derecha hasta dejar la cápsula completa y centrada; se queda fija a 260 px (190 px en móvil) con borde blanco de 2 px y su categoría visible. Así ninguna cápsula se queda partida en la orilla de la pantalla.
+- **Recorrido libre:** la línea se puede mover sin esperar la vuelta completa: arrastrándola, deslizando en el trackpad o con dos flechas de cristal de 52 px a los lados (solo escritorio, mismo hover que los botones). Al soltarla conserva un poco de inercia y retoma su movimiento tras una pausa breve.
+
 ### Etiquetas
 
 - **Filtros:** cápsulas de 40 px con contorno blanco, texto blanco en Jakarta Medium 12 px en mayúsculas; la activa se rellena de blanco con texto azul rey.
@@ -306,7 +312,7 @@ Cápsulas de color de 120 × 160 px con su código hex debajo; todas a la misma 
 
 ### Visor de imágenes
 
-Al tocar una imagen, mockup o diseño dentro de un proyecto, se abre en grande sobre la página, con fondo oscuro de cristal, sin mover ni desplegar el contenido de abajo. Se cambia de imagen deslizando a los lados (o con flechas y teclado en escritorio) y se cierra deslizando hacia abajo o con el botón de cerrar. Así se ven los detalles de cada pieza sin perder el lugar en la landing.
+Al tocar una imagen, mockup o diseño dentro de un proyecto, se abre en grande sobre la página, con fondo oscuro de cristal, sin mover ni desplegar el contenido de abajo. Se cambia de imagen deslizando a los lados (o con flechas y teclado en escritorio) y se cierra deslizando hacia abajo o con el botón de cerrar. Así se ven los detalles de cada pieza sin perder el lugar en la landing. En celular se puede hacer y deshacer zoom pellizcando con dos dedos (hasta 4×) o con doble toque; con zoom, el dedo recorre la imagen y no cambia de imagen ni cierra el visor por accidente.
 
 ### Íconos sociales
 

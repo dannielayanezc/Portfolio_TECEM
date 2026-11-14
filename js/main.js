@@ -319,14 +319,25 @@ class Marquee {
     this.viewport = viewport; this.track = track;
     this.base = reduceMotion ? 0 : speed; this.dir = dir;
     this.offset = 0; this.current = this.base; this.hover = false; this.static = false;
-    this.drag = null; this.moved = false;
+    this.drag = null; this.moved = false; this.inercia = 0; this.tween = null; this.pausa = 0;
     this.measure();
     viewport.addEventListener('mouseenter', () => { this.hover = true; });
     viewport.addEventListener('mouseleave', () => { this.hover = false; });
     viewport.addEventListener('pointerdown', e => this.down(e));
     window.addEventListener('pointermove', e => this.move(e));
     window.addEventListener('pointerup', () => this.up());
+    window.addEventListener('pointercancel', () => this.up());
     viewport.addEventListener('click', e => { if (this.moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+    viewport.addEventListener('dragstart', e => e.preventDefault());
+    // Trackpad o rueda horizontal (también Shift + rueda): mueve la línea sin esperar la vuelta
+    viewport.addEventListener('wheel', e => {
+      if (this.static) return;
+      const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if (!dx) return;
+      e.preventDefault();
+      this.tween = null; this.inercia = 0; this.pausa = 1.5;
+      this.offset -= dx;
+    }, { passive: false });
     window.addEventListener('resize', () => this.measure());
   }
   measure() {
@@ -341,24 +352,66 @@ class Marquee {
   }
   down(e) {
     if (this.static || e.button !== 0) return;
-    this.drag = { x: e.clientX, start: this.offset }; this.moved = false;
+    if (e.pointerType === 'mouse') e.preventDefault(); // evita seleccionar texto o arrastrar imágenes
+    this.tween = null; this.inercia = 0;
+    this.drag = { x: e.clientX, start: this.offset, lastX: e.clientX, lastT: performance.now(), vel: 0 }; this.moved = false;
   }
   move(e) {
     if (!this.drag) return;
     const dx = e.clientX - this.drag.x;
     if (Math.abs(dx) > 6) { this.moved = true; this.viewport.classList.add('is-dragging'); }
+    const now = performance.now(), dt = Math.max(1, now - this.drag.lastT);
+    this.drag.vel = (e.clientX - this.drag.lastX) / dt * 1000; // px por segundo
+    this.drag.lastX = e.clientX; this.drag.lastT = now;
     this.offset = this.drag.start + dx;
   }
   up() {
     if (!this.drag) return;
+    if (this.moved && performance.now() - this.drag.lastT < 80) this.inercia = Math.max(-2400, Math.min(2400, this.drag.vel));
+    this.pausa = 1.2;
     this.drag = null; this.viewport.classList.remove('is-dragging');
     setTimeout(() => { this.moved = false; }, 0);
   }
+  // Desliza la línea una distancia en un recorrido corto y suave
+  glide(dx, dur = 550) {
+    if (this.static || !dx) return;
+    this.inercia = 0;
+    this.tween = { from: this.offset, to: this.offset + dx, t0: performance.now(), dur: reduceMotion ? 1 : dur };
+  }
+  // Coloca completa y centrada la cápsula del proyecto (la copia más cercana al centro)
+  centrar(id) {
+    if (this.static) return;
+    const vp = this.viewport.getBoundingClientRect();
+    const mid = vp.left + vp.width / 2;
+    let mejor = null;
+    $$(`.capsule[data-id="${id}"]`, this.track).forEach(c => {
+      if (c.hidden || c.classList.contains('is-out')) return;
+      const r = c.getBoundingClientRect();
+      const ancho = isMobile() ? 190 : 260; // ancho final de la cápsula seleccionada
+      const d = mid - (r.left + ancho / 2);
+      if (!mejor || Math.abs(d) < Math.abs(mejor)) mejor = d;
+    });
+    if (mejor !== null && Math.abs(mejor) > 2) this.glide(mejor);
+  }
   tick(dt) {
     if (this.static || !this.setWidth) return;
-    const target = this.hover || this.drag || this.locked ? 0 : this.base + (reduceMotion ? 0 : scrollBoost);
+    if (this.pausa > 0) this.pausa -= dt;
+    const quieto = this.hover || this.drag || this.locked || this.tween || this.pausa > 0;
+    const target = quieto ? 0 : this.base + (reduceMotion ? 0 : scrollBoost);
     this.current += (target - this.current) * Math.min(1, dt * 4);
-    if (!this.drag) this.offset += this.dir * this.current * dt;
+    if (this.tween) {
+      const t = Math.min(1, (performance.now() - this.tween.t0) / this.tween.dur);
+      const e = 1 - Math.pow(1 - t, 3);
+      this.offset = this.tween.from + (this.tween.to - this.tween.from) * e;
+      if (t >= 1) this.tween = null;
+    } else if (!this.drag) {
+      this.offset += this.dir * this.current * dt;
+      if (this.inercia) {
+        this.offset += this.inercia * dt;
+        this.inercia *= Math.exp(-dt * 4);
+        if (Math.abs(this.inercia) < 5) this.inercia = 0;
+      }
+    }
     const w = this.setWidth;
     const pos = ((this.offset % w) + w) % w;
     this.track.style.transform = `translate3d(${(-w + pos).toFixed(2)}px,0,0)`;
@@ -482,6 +535,13 @@ workTrack.addEventListener('transitionend', e => {
   cancelAnimationFrame(remeasure);
   remeasure = requestAnimationFrame(() => work.measure());
 });
+
+// Flechas de escritorio: recorren la línea sin esperar la vuelta completa
+const PASO = () => (isMobile() ? 180 : 228) * 2;
+$$('.work__flecha').forEach(b => b.addEventListener('click', () => {
+  work.pausa = 2;
+  work.glide(b.dataset.dir === 'next' ? -PASO() : PASO());
+}));
 
 workTrack.addEventListener('click', e => {
   const c = e.target.closest('.capsule');
@@ -659,6 +719,7 @@ function openProject(id) {
   momentObserver.observe(projectEl);
   work.locked = true;
   $$('.capsule', workTrack).forEach(cap => cap.classList.toggle('is-current', cap.dataset.id === id));
+  requestAnimationFrame(() => work.centrar(id));
   setAurora(p.aurora);
   if (!wasOpen) {
     void projectEl.offsetHeight;            // fuerza el estado cerrado antes de desplegar
@@ -784,8 +845,8 @@ function visorAbrir(img) {
   document.documentElement.style.overflow = 'hidden';
   visorIr(imgs.indexOf(img), false);
   $('.visor__ayuda', visor).textContent = visorItems.length > 1
-    ? 'Desliza a los lados para cambiar de imagen · desliza hacia abajo para cerrar'
-    : 'Desliza hacia abajo para cerrar';
+    ? 'Pellizca para hacer zoom · desliza a los lados para cambiar de imagen · hacia abajo para cerrar'
+    : 'Pellizca para hacer zoom · desliza hacia abajo para cerrar';
   visorPrev.hidden = visorNext.hidden = visorItems.length < 2;
   requestAnimationFrame(() => visor.classList.add('is-open'));
   $('.visor__cerrar', visor).focus({ preventScroll: true });
@@ -805,7 +866,7 @@ projectEl.addEventListener('click', e => {
   const img = e.target.closest(VISOR_SEL);
   if (img) visorAbrir(img);
 });
-$('.visor__cerrar', visor).addEventListener('click', visorCerrar);
+$('.visor__cerrar', visor).addEventListener('click', () => visorCerrar());
 visorPrev.addEventListener('click', () => visorIr(visorI - 1));
 visorNext.addEventListener('click', () => visorIr(visorI + 1));
 document.addEventListener('keydown', e => {
@@ -821,17 +882,90 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* Gestos: horizontal cambia de imagen, hacia abajo cierra */
+/* Gestos del visor:
+   · un dedo hacia los lados: cambia de imagen · un dedo hacia abajo: cierra
+   · dos dedos: zoom (pellizcar para acercar o alejar) · doble toque: acerca o regresa
+   · con zoom, un dedo mueve la imagen para recorrer sus detalles */
 const escena = $('.visor__escena', visor);
+const dedos = new Map();
+let zoom = { s: 1, x: 0, y: 0 }, pellizco = null, ultimoToque = 0;
+
+function imgActual() { const sl = visorPista.children[visorI]; return sl && $('img', sl); }
+function aplicarZoom(animar) {
+  const img = imgActual();
+  if (!img) return;
+  img.style.transition = animar ? 'transform .25s var(--ease)' : 'none';
+  img.style.transform = zoom.s > 1 ? `translate(${zoom.x}px, ${zoom.y}px) scale(${zoom.s})` : '';
+  visor.classList.toggle('is-zoom', zoom.s > 1);
+}
+function limitarZoom() {
+  const img = imgActual();
+  if (!img) return;
+  // tamaño de la imagen sin zoom (offsetWidth no cambia con transform)
+  const bx = Math.max(0, (img.offsetWidth * zoom.s - escena.clientWidth) / 2 + 16);
+  const by = Math.max(0, (img.offsetHeight * zoom.s - escena.clientHeight) / 2 + 16);
+  zoom.x = Math.max(-bx, Math.min(bx, zoom.x));
+  zoom.y = Math.max(-by, Math.min(by, zoom.y));
+}
+function reiniciarZoom(animar = false) { zoom = { s: 1, x: 0, y: 0 }; aplicarZoom(animar); }
+// Acerca o aleja manteniendo fijo el punto (px, py) de la pantalla
+function zoomEn(nuevo, px, py) {
+  const img = imgActual();
+  if (!img) return;
+  const r = escena.getBoundingClientRect();
+  const cx = px - (r.left + r.width / 2), cy = py - (r.top + r.height / 2);
+  const k = nuevo / zoom.s;
+  zoom.x = cx - (cx - zoom.x) * k;
+  zoom.y = cy - (cy - zoom.y) * k;
+  zoom.s = nuevo;
+  if (zoom.s <= 1.02) { zoom = { s: 1, x: 0, y: 0 }; }
+}
+
+const _visorIr = visorIr;
+visorIr = function (i, animar = true) { if (zoom.s > 1) reiniciarZoom(); _visorIr(i, animar); };
+const _visorCerrar = visorCerrar;
+visorCerrar = function () { reiniciarZoom(); _visorCerrar(); };
+
 escena.addEventListener('pointerdown', e => {
   if (e.target.closest('button')) return;
-  visorGesto = { x: e.clientX, y: e.clientY, t: performance.now(), eje: null, dx: 0, dy: 0 };
   escena.setPointerCapture(e.pointerId);
+  dedos.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (dedos.size === 2) {
+    const [a, b] = [...dedos.values()];
+    pellizco = { d: Math.hypot(a.x - b.x, a.y - b.y), s: zoom.s, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2, x: zoom.x, y: zoom.y };
+    visorGesto = null;
+    return;
+  }
+  // doble toque: acerca al punto tocado o regresa al tamaño normal
+  const ahora = performance.now();
+  if (e.pointerType !== 'mouse' && ahora - ultimoToque < 300) {
+    ultimoToque = 0;
+    if (zoom.s > 1) reiniciarZoom(true); else { zoomEn(2.5, e.clientX, e.clientY); limitarZoom(); aplicarZoom(true); }
+    visorGesto = null;
+    return;
+  }
+  visorGesto = { x: e.clientX, y: e.clientY, t: ahora, eje: null, dx: 0, dy: 0, zx: zoom.x, zy: zoom.y };
 });
 escena.addEventListener('pointermove', e => {
+  if (!dedos.has(e.pointerId)) return;
+  dedos.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (pellizco && dedos.size >= 2) {
+    const [a, b] = [...dedos.values()];
+    const d = Math.hypot(a.x - b.x, a.y - b.y);
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    zoom.s = pellizco.s; zoom.x = pellizco.x + (mx - pellizco.mx); zoom.y = pellizco.y + (my - pellizco.my);
+    zoomEn(Math.max(1, Math.min(4, pellizco.s * d / pellizco.d)), mx, my);
+    aplicarZoom(false);
+    return;
+  }
   const g = visorGesto;
   if (!g) return;
   g.dx = e.clientX - g.x; g.dy = e.clientY - g.y;
+  if (zoom.s > 1) { // con zoom, el dedo recorre la imagen
+    zoom.x = g.zx + g.dx; zoom.y = g.zy + g.dy;
+    limitarZoom(); aplicarZoom(false);
+    return;
+  }
   if (!g.eje && Math.hypot(g.dx, g.dy) > 8) g.eje = Math.abs(g.dx) > Math.abs(g.dy) ? 'x' : 'y';
   const slide = visorPista.children[visorI];
   if (g.eje === 'x') {
@@ -847,11 +981,25 @@ escena.addEventListener('pointermove', e => {
     visor.style.setProperty('--visor-fondo', String(.9 - p * .6));
   }
 });
-function visorSoltar() {
+function visorSoltar(e) {
+  dedos.delete(e.pointerId);
+  if (pellizco) {
+    if (dedos.size < 2) {
+      pellizco = null; ultimoToque = 0;
+      if (zoom.s <= 1.02) reiniciarZoom(true); else { limitarZoom(); aplicarZoom(true); }
+      // el dedo que queda sigue moviendo la imagen desde aquí
+      const resto = [...dedos.values()][0];
+      visorGesto = resto ? { x: resto.x, y: resto.y, t: performance.now(), eje: null, dx: 0, dy: 0, zx: zoom.x, zy: zoom.y } : null;
+    }
+    return;
+  }
   const g = visorGesto;
   visorGesto = null;
   if (!g) return;
   const rapido = performance.now() - g.t < 250;
+  // un toque corto y sin movimiento cuenta para el doble toque
+  ultimoToque = e.pointerType !== 'mouse' && rapido && Math.hypot(g.dx, g.dy) < 10 ? performance.now() : 0;
+  if (zoom.s > 1) return;
   const slide = visorPista.children[visorI];
   if (g.eje === 'x') {
     const umbral = escena.clientWidth * .18;
@@ -867,3 +1015,10 @@ function visorSoltar() {
 }
 escena.addEventListener('pointerup', visorSoltar);
 escena.addEventListener('pointercancel', visorSoltar);
+// En computadora: pellizco del trackpad (Ctrl + rueda) también acerca y aleja
+escena.addEventListener('wheel', e => {
+  if (!e.ctrlKey) return;
+  e.preventDefault();
+  zoomEn(Math.max(1, Math.min(4, zoom.s * Math.exp(-e.deltaY * 0.01))), e.clientX, e.clientY);
+  limitarZoom(); aplicarZoom(false);
+}, { passive: false });

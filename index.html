@@ -159,10 +159,18 @@
       </div>
       <!-- Lista de proyectos solo para impresión (se llena en js/main.js) -->
       <ul class="print-proyectos container" id="printProyectos"></ul>
-      <div class="work__viewport" id="workViewport">
-        <div class="work__track" id="workTrack">
-          <!-- Las cápsulas se generan en js/main.js -->
+      <div class="work__marco">
+        <div class="work__viewport" id="workViewport">
+          <div class="work__track" id="workTrack">
+            <!-- Las cápsulas se generan en js/main.js -->
+          </div>
         </div>
+        <button class="work__flecha work__flecha--prev" type="button" data-dir="prev" aria-label="Ver proyectos anteriores">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="work__flecha work__flecha--next" type="button" data-dir="next" aria-label="Ver proyectos siguientes">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
       </div>
     </section>
 
