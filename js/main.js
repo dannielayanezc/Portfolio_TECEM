@@ -63,7 +63,7 @@ const PROYECTOS = [
           'Se desarrollaron los elementos centrales de la identidad —logotipo, paleta cromática, tipografía y estilo gráfico— y su aplicación en envases, manteniendo el reconocimiento de la marca y adaptándola a un contexto visual contemporáneo.',
         ] },
         { tipo: 'logo', src: 'assets/img/proyectos/baygon/baygon-logo.svg', alt: 'Logotipo rediseñado de Baygon', titulo: 'Rediseño de logo', glow: 'rgba(225, 33, 38, .75)',
-          tipos: [{ src: 'assets/img/proyectos/baygon/tipografia-1.svg', alt: 'Muestra de la primera tipografía del logotipo' }, { src: 'assets/img/proyectos/baygon/tipografia-2.svg', alt: 'Muestra de la segunda tipografía del logotipo' }],
+          tipos: [{ src: 'assets/img/proyectos/baygon/tipografia-1.svg', w: 169.697, h: 8.509, alt: 'Muestra de la primera tipografía del logotipo' }, { src: 'assets/img/proyectos/baygon/tipografia-2.svg', w: 87.486, h: 8.755, alt: 'Muestra de la segunda tipografía del logotipo' }],
           parrafos: [
           'La elección de utilizar el logotipo de Baygon en caja alta busca reforzar su carácter contemporáneo, sólido y profesional. El uso exclusivo de mayúsculas aporta firmeza y uniformidad, y transmite modernidad, confianza y autoridad, en concordancia con la promesa de eficacia y protección de la marca.',
           'La composición se desarrolló a partir de dos tipografías distintas, que después fueron intervenidas para construir una identidad visual que proyecta solidez, seguridad y una imagen renovada, sin perder la esencia reconocible de Baygon.',
@@ -117,7 +117,7 @@ const PROYECTOS = [
           'Diseño de una submarca para Kleenex, una marca ya posicionada. Se desarrollaron cuatro propuestas de empaque para este producto, diseñadas a partir del concepto de la submarca, Winter.',
         ] },
         { tipo: 'logo', src: 'assets/img/proyectos/kleenex/kleenex-winter-logo.svg', alt: 'Logotipo de Kleenex Winter', titulo: 'Logotipo de la submarca', claro: true,
-          tipos: [{ src: 'assets/img/proyectos/kleenex/tipografia-1.svg', alt: 'Muestra de la primera tipografía del logotipo' }, { src: 'assets/img/proyectos/kleenex/tipografia-2.svg', alt: 'Muestra de la segunda tipografía del logotipo' }, { src: 'assets/img/proyectos/kleenex/tipografia-3.svg', alt: 'Muestra de la tercera tipografía del logotipo' }],
+          tipos: [{ src: 'assets/img/proyectos/kleenex/tipografia-1.svg', w: 165.988, h: 24.568, alt: 'Muestra de la primera tipografía del logotipo' }, { src: 'assets/img/proyectos/kleenex/tipografia-2.svg', w: 133.769, h: 23.758, alt: 'Muestra de la segunda tipografía del logotipo' }, { src: 'assets/img/proyectos/kleenex/tipografia-3.svg', w: 137.693, h: 35.463, alt: 'Muestra de la tercera tipografía del logotipo' }],
           tiposIguales: true,
           parrafos: [
           'El logotipo de la submarca se construyó mediante la combinación de tres tipografías, buscando transmitir una estética invernal. Se eligió un nombre sencillo y directamente relacionado con el concepto para facilitar su identificación.',
@@ -517,14 +517,14 @@ function renderBloque(b) {
     </div>`;
   }
   if (b.tipo === 'texto') {
-    const paleta = b.paleta ? `<ul class="paleta">${b.paleta.map(h => `<li><span class="paleta__chip" style="background:${h}"></span><span class="paleta__hex">${h}</span></li>`).join('')}</ul>` : '';
+    const paleta = b.paleta ? `<ul class="paleta${b.paleta.length >= 5 ? ' paleta--filas' : ''}" style="--n:${b.paleta.length}">${b.paleta.map(h => `<li><span class="paleta__chip" style="background:${h}"></span><span class="paleta__hex">${h}</span></li>`).join('')}</ul>` : '';
     const cita = b.cita ? `<blockquote class="pcita">${b.cita.map(t => `<p>${sinViuda(t)}</p>`).join('')}</blockquote>` : '';
     return `<div class="pblock pblock--texto"><h3>${b.titulo}</h3>${b.parrafos.map(t => `<p>${sinViuda(t)}</p>`).join('')}${cita}${paleta}</div>`;
   }
   if (b.tipo === 'logo') {
     return `<div class="pblock pblock--logo">
       <figure class="pblock__logo${b.claro ? ' pblock__logo--claro' : ''}"${b.glow ? ` style="--glow:${b.glow}"` : ''}><img src="${b.src}" alt="${b.alt}"></figure>
-      <div><h3>${b.titulo}</h3>${b.parrafos.map(t => `<p>${sinViuda(t)}</p>`).join('')}${b.tipos ? `<div class="pblock__tipos${b.tiposIguales ? ' pblock__tipos--iguales' : ''}">${b.tipos.map(t => `<img src="${t.src}" alt="${t.alt}">`).join('')}</div>` : ''}</div>
+      <div><h3>${b.titulo}</h3>${b.parrafos.map(t => `<p>${sinViuda(t)}</p>`).join('')}${b.tipos ? `<div class="pblock__tipos${b.tiposIguales ? ' pblock__tipos--iguales' : ''}">${b.tipos.map(t => `<img src="${t.src}"${t.w ? ` width="${t.w}" height="${t.h}"` : ''} alt="${t.alt}">`).join('')}</div>` : ''}</div>
     </div>`;
   }
   if (b.tipo === 'envases') {
@@ -724,3 +724,146 @@ function loop(now) {
 }
 requestAnimationFrame(loop);
 window.addEventListener('load', () => { ribbon.measure(); work.measure(); });
+
+/* =========================================================
+   Visor de imágenes: se sobrepone al contenido sin moverlo.
+   Desliza a los lados para cambiar de imagen y hacia abajo
+   para cerrar. También funciona con teclado (← → Esc).
+   ========================================================= */
+const VISOR_SEL = '.pshot img, .medio img, .vitrina__panel img, .pcartel img';
+const visor = document.createElement('div');
+visor.className = 'visor';
+visor.hidden = true;
+visor.setAttribute('role', 'dialog');
+visor.setAttribute('aria-modal', 'true');
+visor.setAttribute('aria-label', 'Visor de imágenes del proyecto');
+visor.innerHTML = `
+  <div class="visor__barra">
+    <span class="visor__contador" aria-live="polite"></span>
+    <button class="visor__cerrar" type="button" aria-label="Cerrar visor">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="visor__escena">
+    <button class="visor__flecha visor__flecha--prev" type="button" aria-label="Imagen anterior">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <div class="visor__pista"></div>
+    <button class="visor__flecha visor__flecha--next" type="button" aria-label="Imagen siguiente">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+  <p class="visor__ayuda">Desliza a los lados para cambiar de imagen · desliza hacia abajo para cerrar</p>`;
+document.body.appendChild(visor);
+
+const visorPista = $('.visor__pista', visor);
+const visorContador = $('.visor__contador', visor);
+const visorPrev = $('.visor__flecha--prev', visor);
+const visorNext = $('.visor__flecha--next', visor);
+let visorItems = [], visorI = 0, visorOrigen = null, visorGesto = null;
+
+function visorPie(img) {
+  const fig = img.closest('figure');
+  const cap = fig && fig.querySelector('figcaption');
+  return cap ? cap.textContent.trim() : '';
+}
+function visorIr(i, animar = true) {
+  visorI = Math.max(0, Math.min(visorItems.length - 1, i));
+  visorPista.classList.toggle('is-anim', animar && !reduceMotion);
+  visorPista.style.transform = `translateX(${-visorI * 100}%)`;
+  visorContador.textContent = `${visorI + 1} / ${visorItems.length}`;
+  visorPrev.disabled = visorI === 0;
+  visorNext.disabled = visorI === visorItems.length - 1;
+}
+function visorAbrir(img) {
+  const imgs = $$(VISOR_SEL, projectEl);
+  visorItems = imgs.map(el => ({ src: el.currentSrc || el.src, alt: el.alt, pie: visorPie(el) }));
+  visorPista.innerHTML = visorItems.map(it => `<figure class="visor__slide"><img src="${it.src}" alt="${it.alt}" draggable="false">${it.pie ? `<figcaption>${it.pie}</figcaption>` : ''}</figure>`).join('');
+  visorOrigen = document.activeElement;
+  visor.hidden = false;
+  document.documentElement.style.overflow = 'hidden';
+  visorIr(imgs.indexOf(img), false);
+  $('.visor__ayuda', visor).textContent = visorItems.length > 1
+    ? 'Desliza a los lados para cambiar de imagen · desliza hacia abajo para cerrar'
+    : 'Desliza hacia abajo para cerrar';
+  visorPrev.hidden = visorNext.hidden = visorItems.length < 2;
+  requestAnimationFrame(() => visor.classList.add('is-open'));
+  $('.visor__cerrar', visor).focus({ preventScroll: true });
+}
+function visorCerrar() {
+  visor.classList.remove('is-open');
+  document.documentElement.style.overflow = '';
+  setTimeout(() => {
+    visor.hidden = true;
+    visor.style.removeProperty('--visor-fondo');
+    visorPista.innerHTML = '';
+  }, reduceMotion ? 0 : 300);
+  if (visorOrigen && visorOrigen.focus) visorOrigen.focus({ preventScroll: true });
+}
+
+projectEl.addEventListener('click', e => {
+  const img = e.target.closest(VISOR_SEL);
+  if (img) visorAbrir(img);
+});
+$('.visor__cerrar', visor).addEventListener('click', visorCerrar);
+visorPrev.addEventListener('click', () => visorIr(visorI - 1));
+visorNext.addEventListener('click', () => visorIr(visorI + 1));
+document.addEventListener('keydown', e => {
+  if (visor.hidden) return;
+  if (e.key === 'Escape') visorCerrar();
+  else if (e.key === 'ArrowLeft') visorIr(visorI - 1);
+  else if (e.key === 'ArrowRight') visorIr(visorI + 1);
+  else if (e.key === 'Tab') { // el foco se queda dentro del visor
+    const f = $$('button:not([disabled])', visor);
+    const i = f.indexOf(document.activeElement);
+    e.preventDefault();
+    f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+  }
+});
+
+/* Gestos: horizontal cambia de imagen, hacia abajo cierra */
+const escena = $('.visor__escena', visor);
+escena.addEventListener('pointerdown', e => {
+  if (e.target.closest('button')) return;
+  visorGesto = { x: e.clientX, y: e.clientY, t: performance.now(), eje: null, dx: 0, dy: 0 };
+  escena.setPointerCapture(e.pointerId);
+});
+escena.addEventListener('pointermove', e => {
+  const g = visorGesto;
+  if (!g) return;
+  g.dx = e.clientX - g.x; g.dy = e.clientY - g.y;
+  if (!g.eje && Math.hypot(g.dx, g.dy) > 8) g.eje = Math.abs(g.dx) > Math.abs(g.dy) ? 'x' : 'y';
+  const slide = visorPista.children[visorI];
+  if (g.eje === 'x') {
+    visorPista.classList.remove('is-anim');
+    const borde = (visorI === 0 && g.dx > 0) || (visorI === visorItems.length - 1 && g.dx < 0) ? .3 : 1;
+    visorPista.style.transform = `translateX(calc(${-visorI * 100}% + ${g.dx * borde}px))`;
+  } else if (g.eje === 'y' && slide) {
+    const dy = Math.max(0, g.dy);
+    const p = Math.min(1, dy / 400);
+    slide.classList.remove('is-suelto');
+    slide.style.transform = `translateY(${dy}px) scale(${1 - p * .15})`;
+    slide.style.opacity = String(1 - p * .5);
+    visor.style.setProperty('--visor-fondo', String(.9 - p * .6));
+  }
+});
+function visorSoltar() {
+  const g = visorGesto;
+  visorGesto = null;
+  if (!g) return;
+  const rapido = performance.now() - g.t < 250;
+  const slide = visorPista.children[visorI];
+  if (g.eje === 'x') {
+    const umbral = escena.clientWidth * .18;
+    if (g.dx < -umbral || (rapido && g.dx < -40)) visorIr(visorI + 1);
+    else if (g.dx > umbral || (rapido && g.dx > 40)) visorIr(visorI - 1);
+    else visorIr(visorI);
+  } else if (g.eje === 'y' && slide) {
+    if (g.dy > 120 || (rapido && g.dy > 60)) { visorCerrar(); return; }
+    slide.classList.add('is-suelto');
+    slide.style.transform = ''; slide.style.opacity = '';
+    visor.style.removeProperty('--visor-fondo');
+  }
+}
+escena.addEventListener('pointerup', visorSoltar);
+escena.addEventListener('pointercancel', visorSoltar);

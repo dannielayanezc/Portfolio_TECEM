@@ -24,11 +24,12 @@ typography:
   display:
     fontFamily: Capsule
     fontWeight: 400
-    letterSpacing: -0.01em
+    letterSpacing: 0.04em      # interletrado abierto para leer mejor
   hero:
     fontFamily: Capsule
     fontSize: clamp(88px, 18vw, 280px)
     lineHeight: 0.82
+    letterSpacing: -0.01em     # solo PORT / FOLIO
   title:
     fontFamily: Capsule
     fontSize: 64px
@@ -138,6 +139,16 @@ components:
     focus: "border {colors.primary}; glow 0 0 0 4px rgba(43, 89, 255, 0.25)"
     height: 52px
     rounded: "{rounded.field}"
+  palette-swatch:
+    size: 120px x 160px
+    rounded: "{rounded.pill}"
+    label: "hex en Jakarta SemiBold 14px (12px en móvil)"
+    mobile: "misma altura; hasta 4 por línea; 5 o más en filas de 3"
+  image-viewer:
+    backgroundColor: "rgba(6, 6, 12, 0.9) + blur 18px"
+    image: "contenida, radio 20px (14px en móvil)"
+    controls: "cerrar 48px, flechas 48px en escritorio, contador"
+    gestures: "deslizar a los lados = cambiar imagen; deslizar hacia abajo = cerrar; ← → Esc"
   social-icon:
     size: 44px
     sizeMobile: 48px
@@ -189,6 +200,10 @@ La identidad cromática es amplia, luminosa y versátil. El **azul eléctrico** 
 
 > El rosa del conejito (`#FFA4D0`) se reserva para mi motivo gráfico.
 
+### Versión clara (design.html)
+
+La página de referencia del sistema usa fondo casi blanco con la misma aurora en tonos cielo (`#7FA6FF`), lavanda (`#A88CFF`), rosa (`#F59BCB`) y cian (`#6FD3F5`), un poco más saturados para que el degradado se note y no rompa la unidad con la landing oscura. El texto se mantiene en negro profundo.
+
 ### Aurora por sección
 
 Cada sección de la landing cambia la aurora del fondo; siempre son cuatro colores y siempre hay uno de mis azules. Cada proyecto abre con una aurora armada con sus propios colores, anclada en el azul eléctrico.
@@ -214,7 +229,7 @@ Cada sección de la landing cambia la aurora del fondo; siempre son cuatro color
 
 ### Reglas tipográficas
 
-- Capsule usa un solo peso (Regular) y tracking de −1 %.
+- Capsule usa un solo peso (Regular) y un interletrado abierto de **+4 %**. Sus formas redondas y anchas tienden a juntarse, y con el tracking cerrado algunas palabras costaban trabajo de leer, sobre todo en tamaños medianos y en celular. Solo la composición del inicio (PORT / FOLIO) conserva −1 %, porque funciona como imagen tipográfica y no como texto de lectura.
 - Plus Jakarta Sans trabaja con cuatro pesos: 700, 600, 500 y 400.
 - Sin palabras huérfanas al final de los párrafos.
 
@@ -242,7 +257,7 @@ Retícula de 12 columnas con medianiles de 24 px, ancho máximo de contenido de 
 | Escritorio | 1024 px en adelante | 12 columnas · 24 px | 64 px | 144 px |
 | Móvil | hasta 1023 px | 4 columnas · 16 px | 20 px | 52 px |
 
-En móvil: menú a pantalla completa con fondo aurora y enlaces en Capsule; las cápsulas de proyecto siguen en horizontal (160 px); todo lo táctil mide mínimo 48 × 48 px; la aurora queda estática para cuidar la batería.
+En móvil: menú a pantalla completa con fondo aurora y enlaces en Capsule; las cápsulas de proyecto siguen en horizontal (160 px); las paletas mantienen sus muestras a la misma altura; las muestras tipográficas se alinean a la izquierda con su proporción real; todo lo táctil mide mínimo 48 × 48 px; la aurora queda estática para cuidar la batería.
 
 ## Elevation & Depth
 
@@ -284,6 +299,14 @@ Ventanas verticales de 200 px con el logotipo o nombre del proyecto sobre una au
 ### Campos y formularios
 
 Fondo blanco, borde de 1.5 px en azul cielo, radio de 14 px y 52 px de alto; al enfocarse, borde azul eléctrico con resplandor suave. Etiquetas arriba en Jakarta Medium 13 px.
+
+### Muestras de paleta
+
+Cápsulas de color de 120 × 160 px con su código hex debajo; todas a la misma altura. En móvil se hacen más pequeñas para mantener el orden: hasta cuatro colores en una línea y, si son cinco o más, filas de tres (3 + 2 o 3 + 3), sin reducirlas tanto que pierdan presencia.
+
+### Visor de imágenes
+
+Al tocar una imagen, mockup o diseño dentro de un proyecto, se abre en grande sobre la página, con fondo oscuro de cristal, sin mover ni desplegar el contenido de abajo. Se cambia de imagen deslizando a los lados (o con flechas y teclado en escritorio) y se cierra deslizando hacia abajo o con el botón de cerrar. Así se ven los detalles de cada pieza sin perder el lugar en la landing.
 
 ### Íconos sociales
 

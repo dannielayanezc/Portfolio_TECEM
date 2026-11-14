@@ -74,7 +74,7 @@ Los programas con los que diseño, en círculos de luz que se sobreponen:
 
 Filtros: **Todo · Identidad · UX/UI · 3D · Interactivo · Campañas · Empaque · Fotografía**
 
-Cada proyecto es una cápsula con su logotipo. Al hacer clic, se despliega su desglose debajo de Trabajo, y al final aparecen los demás proyectos en cápsulas pequeñas.
+Cada proyecto es una cápsula con su logotipo. Al hacer clic, se despliega su desglose debajo de Trabajo, y al final aparecen los demás proyectos en cápsulas pequeñas. Al tocar una imagen del proyecto se abre el visor: se ve en grande sobre la página, se desliza a los lados para cambiar de imagen y hacia abajo para cerrar.
 
 ### 7.1 · Estrellas Variables
 

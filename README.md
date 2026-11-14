@@ -24,7 +24,7 @@ Este repositorio contiene mi landing de CV y portafolio digital, y la referencia
 | `design.html` | Referencia visual del sistema de diseño (tema claro con la misma estética). |
 | `css/styles.css` | Estilos de la landing: tokens, aurora, componentes, responsivo (móvil y escritorio) e impresión. |
 | `css/design.css` | Estilos de la página del sistema de diseño. |
-| `js/main.js` | Aurora por sección, navegación y menú móvil, cinta de disciplinas, círculos de herramientas, cápsulas de proyecto con filtros, desglose de cada proyecto, vistas 360° y formulario de contacto. |
+| `js/main.js` | Aurora por sección, navegación y menú móvil, cinta de disciplinas, círculos de herramientas, cápsulas de proyecto con filtros, desglose de cada proyecto, visor de imágenes con gestos, vistas 360° y formulario de contacto. |
 | `assets/img/` | Foto, conejito, logotipos e imágenes de los proyectos. |
 | `assets/giro/` | Secuencias de las vistas 360° de los envases de Baygon. |
 | `assets/pdf/` | Documentos del proyecto en PDF. |
@@ -45,7 +45,7 @@ Estrellas Variables · Baygon · FICM · Kleenex Winter · Libro Azul · Femme F
 
 ## Accesibilidad
 
-- Navegación completa con teclado.
+- Navegación completa con teclado, incluido el visor de imágenes (← → para cambiar, Esc para cerrar).
 - Enlace **Saltar al contenido**.
 - Foco visible en todos los elementos interactivos.
 - Texto en blanco o negro profundo, con contraste AA.
