@@ -536,13 +536,6 @@ workTrack.addEventListener('transitionend', e => {
   remeasure = requestAnimationFrame(() => work.measure());
 });
 
-// Flechas de escritorio: recorren la línea sin esperar la vuelta completa
-const PASO = () => (isMobile() ? 180 : 228) * 2;
-$$('.work__flecha').forEach(b => b.addEventListener('click', () => {
-  work.pausa = 2;
-  work.glide(b.dataset.dir === 'next' ? -PASO() : PASO());
-}));
-
 workTrack.addEventListener('click', e => {
   const c = e.target.closest('.capsule');
   if (c) openProject(c.dataset.id);

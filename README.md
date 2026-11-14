@@ -24,7 +24,7 @@ Este repositorio contiene mi landing de CV y portafolio digital, y la referencia
 | `design.html` | Referencia visual del sistema de diseño (tema claro con la misma estética). |
 | `css/styles.css` | Estilos de la landing: tokens, aurora, componentes, responsivo (móvil y escritorio) e impresión. |
 | `css/design.css` | Estilos de la página del sistema de diseño. |
-| `js/main.js` | Aurora por sección, navegación y menú móvil, cinta de disciplinas, círculos de herramientas, cápsulas de proyecto con filtros (línea que se arrastra, se mueve con trackpad o flechas, y centra la cápsula seleccionada), desglose de cada proyecto, visor de imágenes con gestos y zoom con dos dedos, vistas 360° y formulario de contacto. |
+| `js/main.js` | Aurora por sección, navegación y menú móvil, cinta de disciplinas, círculos de herramientas, cápsulas de proyecto con filtros (línea que se arrastra, se desliza con trackpad o con el dedo, y centra la cápsula seleccionada), desglose de cada proyecto, visor de imágenes con gestos y zoom con dos dedos, vistas 360° y formulario de contacto. |
 | `assets/img/` | Foto, conejito, logotipos e imágenes de los proyectos. |
 | `assets/giro/` | Secuencias de las vistas 360° de los envases de Baygon. |
 | `assets/pdf/` | Documentos del proyecto en PDF. |

@@ -127,7 +127,8 @@ components:
     border: "1px rgba(255, 255, 255, 0.18)"
     hover: "{elevation.glow}"
     selected: "se centra completa con un recorrido de 0.55s; fija a 260px (190px en móvil), borde blanco 2px"
-    controls: "arrastre, trackpad y flechas de cristal 52px (solo escritorio); inercia al soltar"
+    controls: "arrastre con mouse, trackpad o dedo (sin flechas); inercia al soltar"
+    metaBottom: "84px del borde inferior (64px en móvil)"
   chip:
     height: 40px
     heightMobile: 48px
@@ -292,10 +293,10 @@ En móvil: menú a pantalla completa con fondo aurora y enlaces en Capsule; las 
 
 ### Cápsulas de proyecto
 
-Ventanas verticales de 200 px con el logotipo o nombre del proyecto sobre una aurora con sus colores y borde blanco translúcido de 1 px. En hover se ensanchan a 260 px, se iluminan con el resplandor y muestran categoría y año en Jakarta Medium 12 px. Al final de cada proyecto se repiten en miniatura (84 × 140 px).
+Ventanas verticales de 200 px con el logotipo o nombre del proyecto sobre una aurora con sus colores y borde blanco translúcido de 1 px. En hover se ensanchan a 260 px, se iluminan con el resplandor y muestran categoría y año en Jakarta Medium 12 px, colocados a 84 px del borde inferior (64 px en móvil): la curva de la cápsula se cierra abajo y, más cerca de la orilla, esos datos quedaban apretados y costaba leerlos. Al final de cada proyecto se repiten en miniatura (84 × 140 px).
 
 - **Selección:** al elegir un proyecto, la línea hace un recorrido rápido (0.55 s, salida suave) hacia la izquierda o la derecha hasta dejar la cápsula completa y centrada; se queda fija a 260 px (190 px en móvil) con borde blanco de 2 px y su categoría visible. Así ninguna cápsula se queda partida en la orilla de la pantalla.
-- **Recorrido libre:** la línea se puede mover sin esperar la vuelta completa: arrastrándola, deslizando en el trackpad o con dos flechas de cristal de 52 px a los lados (solo escritorio, mismo hover que los botones). Al soltarla conserva un poco de inercia y retoma su movimiento tras una pausa breve.
+- **Recorrido libre:** la línea se puede mover sin esperar la vuelta completa: arrastrándola con el mouse, deslizando en el trackpad o, en celular, con el dedo. Al soltarla conserva un poco de inercia y retoma su movimiento tras una pausa breve. No lleva flechas: el gesto de deslizar es más directo y mantiene limpia la línea de cápsulas.
 
 ### Etiquetas
 
