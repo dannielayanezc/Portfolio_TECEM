@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniela Yañez · Portafolio</title>
+  <meta name="description" content="Portafolio y CV de Daniela Yañez, diseñadora gráfica digital: identidad de marca, empaque, campañas publicitarias, UX/UI y arte 3D.">
+  <meta name="theme-color" content="#06060C">
+  <link rel="icon" href="assets/img/conejito-rosa.svg" type="image/svg+xml">
+
+  <!-- Capsule (Adobe Fonts) -->
+  <link rel="stylesheet" href="https://use.typekit.net/esr6ltj.css">
+  <!-- Plus Jakarta Sans (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- Aurora de fondo: una sola para toda la página. Cambia de colores según el momento. -->
+  <div class="aurora" aria-hidden="true">
+    <span class="aurora__blob aurora__blob--1"></span>
+    <span class="aurora__blob aurora__blob--2"></span>
+    <span class="aurora__blob aurora__blob--3"></span>
+    <span class="aurora__blob aurora__blob--4"></span>
+  </div>
+
+  <!-- ===================== NAVEGACIÓN ===================== -->
+  <header class="nav" id="nav">
+    <a href="#inicio" class="brand" aria-label="Daniela Yañez, volver al inicio">
+      <span class="brand__mark"><img src="assets/img/conejito-rosa.svg" alt="" width="44" height="44"></span>
+      <span class="brand__name">Daniela Yañez</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#sobre-mi" class="nav__link">Sobre mí</a>
+      <a href="#herramientas" class="nav__link">Herramientas</a>
+      <a href="#trabajo" class="nav__link">Trabajo</a>
+      <a href="#contacto" class="nav__link">Contacto</a>
+    </nav>
+
+    <button class="nav__toggle" id="menuToggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Menú móvil a pantalla completa -->
+  <div class="menu-panel" id="menuPanel" hidden>
+    <nav aria-label="Menú móvil">
+      <a href="#sobre-mi" class="menu-panel__link">Sobre mí</a>
+      <a href="#herramientas" class="menu-panel__link">Kit</a>
+      <a href="#trabajo" class="menu-panel__link">Trabajo</a>
+      <a href="#contacto" class="menu-panel__link">Contacto</a>
+    </nav>
+  </div>
+
+  <main id="contenido" tabindex="-1">
+
+    <!-- ===================== 1 · COMIENZO ===================== -->
+    <section class="hero moment" id="inicio" data-aurora="#1E3BB3,#2B59FF,#7B5CFF,#5CCBF0">
+      <h1 class="sr-only">Portfolio de Daniela Yañez, Diseñadora Gráfica Digital</h1>
+      <div class="hero__comp" aria-hidden="true">
+        <div class="hero__row hero__row--top">
+          <span class="hero__word hero__word--port">PORT</span>
+          <span class="hero__tag hero__tag--role">Diseñadora Gráfica Digital</span>
+        </div>
+        <div class="hero__row hero__row--bottom">
+          <span class="hero__tag hero__tag--name">Daniela Yañez</span>
+          <span class="hero__word hero__word--folio">FOLIO</span>
+        </div>
+      </div>
+      <div class="hero__actions">
+        <a href="#trabajo" class="btn btn--primary">
+          Ver mi trabajo
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== 2 · SOBRE MÍ ===================== -->
+    <section class="about moment" id="sobre-mi" data-aurora="#2B59FF,#BBA9FF,#E557A8,#5CCBF0">
+      <div class="container about__grid">
+        <figure class="about__photo" data-reveal>
+          <img src="assets/img/daniela.jpg" alt="Daniela Yañez" width="390" height="546">
+        </figure>
+        <div class="about__text" data-reveal>
+          <p class="eyebrow">Sobre mí</p>
+          <h2 class="display about__title">Hola, soy Daniela</h2>
+          <p class="lead">Me considero una persona proactiva y responsable, apasionada por el diseño, creativa y amante de los colores y la moda. Lo que más disfruto es el modelado 3D de productos, el UX/UI, la fotografía, la animación de producto, la tipografía, las campañas publicitarias, el envase y empaque y la identidad de marca.</p>
+          <dl class="about__facts">
+            <div>
+              <dt>Formación</dt>
+              <dd>Estudiante de Diseño Gráfico Digital · Universidad La Salle</dd>
+            </div>
+            <div>
+              <dt>Idiomas</dt>
+              <dd>Inglés · certificado en nivel 5</dd>
+            </div>
+          </dl>
+          <p class="eyebrow">Lo que me inspira</p>
+          <ul class="tags" aria-label="Intereses">
+            <li class="tag" style="--tag: #6A4BE8">Moda</li>
+            <li class="tag" style="--tag: #C93D8C">Make-up</li>
+            <li class="tag" style="--tag: #1C7FB0">Música</li>
+            <li class="tag" style="--tag: #5A8A12">Color</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 3 · MI FORMA DE DISEÑAR ===================== -->
+    <section class="manifesto moment" id="forma" data-aurora="#1E3BB3,#7B5CFF,#E557A8,#2B59FF">
+      <div class="container">
+        <div class="manifesto__copy">
+          <h2 class="display manifesto__title" data-reveal>Mi forma de diseñar</h2>
+          <div class="manifesto__text" data-reveal>
+            <p>Diseño a partir de una metodología estructurada: el doble diamante. Primero investigo para comprender a fondo el tema o la problemática; después profundizo en el usuario y diseño a partir de sus necesidades.</p>
+            <p>Me gusta experimentar con colores, texturas y formas para visualizar la mayor cantidad de alternativas posibles y quedarme con lo mejor de cada una. Creo que una buena variedad en el bocetaje y en las primeras propuestas es el camino para llegar a la mejor solución.</p>
+            <p>Para mí, el diseño es una forma creativa y única de proponer soluciones a distintas problemáticas y de contribuir al desarrollo de nuestra sociedad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4 · DISCIPLINAS FAVORITAS ===================== -->
+    <section class="disciplines moment" id="disciplinas" aria-label="Disciplinas favoritas" data-aurora="#2B59FF,#FF8466,#7B5CFF,#E557A8">
+      <div class="ribbon" id="ribbon">
+        <div class="ribbon__track" id="ribbonTrack">
+          <!-- Las disciplinas se generan en js/main.js -->
+        </div>
+      </div>
+      <p class="disciplines__hint container">Toca una disciplina para ver los proyectos relacionados.</p>
+    </section>
+
+    <!-- ===================== 5 · MIS HERRAMIENTAS ===================== -->
+    <section class="tools moment" id="herramientas" data-aurora="#1E3BB3,#7B5CFF,#2B59FF,#5CCBF0">
+      <div class="container">
+        <div class="tools__head" data-reveal>
+          <h2 class="display tools__title">KIT</h2>
+          <p class="lead">Los programas con los que diseño.</p>
+        </div>
+        <div class="tools__stage" id="toolsStage" data-reveal>
+          <!-- Los círculos se dibujan en js/main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 6 · MI TRABAJO ===================== -->
+    <section class="work moment" id="trabajo" data-aurora="#2B59FF,#7B5CFF,#FF8466,#1E3BB3">
+      <div class="container">
+        <h2 class="display work__title" data-reveal>TRABAJO</h2>
+        <div class="chips" id="chips" role="group" aria-label="Filtrar proyectos por categoría">
+          <!-- Las etiquetas se generan en js/main.js -->
+        </div>
+      </div>
+      <!-- Lista de proyectos solo para impresión (se llena en js/main.js) -->
+      <ul class="print-proyectos container" id="printProyectos"></ul>
+      <div class="work__viewport" id="workViewport">
+        <div class="work__track" id="workTrack">
+          <!-- Las cápsulas se generan en js/main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 7 · DENTRO DE UN PROYECTO ===================== -->
+    <section class="project moment" id="proyecto" hidden>
+      <!-- Se llena desde js/main.js al hacer clic en una cápsula -->
+    </section>
+
+    <!-- ===================== 8 · CONTACTO ===================== -->
+    <section class="contact moment" id="contacto" data-aurora="#1E3BB3,#2B59FF,#7B5CFF,#E557A8">
+      <div class="container">
+        <h2 class="display contact__title" data-reveal>¿CREAMOS <span>ALGO?</span></h2>
+        <div class="contact__grid">
+          <div class="contact__info" data-reveal>
+            <p class="lead">Si tienes un proyecto en mente o quieres ver más de mi trabajo, escríbeme.</p>
+            <!-- Cambia el correo en js/main.js (constante CORREO) -->
+            <a href="#" class="btn btn--primary js-mail">Escríbeme</a>
+            <div class="socials">
+              <a class="social" href="https://www.instagram.com/dannnouveau/" target="_blank" rel="noopener" aria-label="Instagram @dannnouveau">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+              
+              <a class="social social--text" href="https://www.behance.net/danielayanez3" target="_blank" rel="noopener" aria-label="Behance Daniela Yañez">Bē</a>
+              <!-- LinkedIn opcional:
+              <a class="social social--text" href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+              -->
+            </div>
+          </div>
+          <form class="contact__form glass" id="contactForm" data-reveal novalidate>
+            <label class="field">
+              <span>Nombre</span>
+              <input type="text" name="nombre" placeholder="Tu nombre" required>
+            </label>
+            <label class="field">
+              <span>Correo</span>
+              <input type="email" name="correo" placeholder="nombre@correo.com" required>
+            </label>
+            <label class="field">
+              <span>Mensaje</span>
+              <textarea name="mensaje" rows="4" placeholder="Cuéntame tu idea" required></textarea>
+            </label>
+            <p class="form__error" id="formError" role="alert"></p>
+            <button type="submit" class="btn btn--primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer moment" data-aurora="#1E3BB3,#2B59FF,#5CCBF0,#2B59FF">
+    <div class="container footer__inner">
+      <p class="footer__name">Daniela Yañez · Diseñadora Gráfica Digital</p>
+      <a href="#inicio" class="footer__top" aria-label="Volver al inicio">
+        <span class="brand__mark brand__mark--lg"><img src="assets/img/conejito-rosa.svg" alt="" width="64" height="64"></span>
+      </a>
+      <p class="footer__social">
+        <a href="https://www.instagram.com/dannnouveau/" target="_blank" rel="noopener">@dannnouveau</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://www.behance.net/danielayanez3" target="_blank" rel="noopener">Behance</a>
+        <span aria-hidden="true">·</span>
+        <a href="design.html">Sistema de diseño</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

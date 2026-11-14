@@ -1,0 +1,13 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de trabajo que no se publican
+assets/video/
+assets/img/conejito.svg
+assets/img/proyectos/*.jpg
+assets/img/proyectos/libro-azul/libro-azul.jpg
+assets/img/proyectos/libro-azul/libro-azul-obra.jpg
+*.zip
+*.ai
+~$*

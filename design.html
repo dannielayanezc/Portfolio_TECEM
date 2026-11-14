@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de diseño · Daniela Yañez</title>
+  <meta name="description" content="Referencia visual del sistema de diseño de Daniela Yañez: colores, tipografía, espaciado, profundidad, formas, componentes y reglas.">
+  <meta name="theme-color" content="#F7F8FF">
+  <link rel="icon" href="assets/img/conejito-rosa.svg" type="image/svg+xml">
+
+  <!-- Capsule (Adobe Fonts) -->
+  <link rel="stylesheet" href="https://use.typekit.net/esr6ltj.css">
+  <!-- Plus Jakarta Sans (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+
+  <link rel="stylesheet" href="css/design.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- Aurora clara de fondo -->
+  <div class="aurora" aria-hidden="true">
+    <span class="aurora__blob aurora__blob--1"></span>
+    <span class="aurora__blob aurora__blob--2"></span>
+    <span class="aurora__blob aurora__blob--3"></span>
+  </div>
+
+  <header class="nav">
+    <a href="index.html" class="brand" aria-label="Volver a la landing de Daniela Yañez">
+      <img class="brand__mark" src="assets/img/conejito-rosa.svg" alt="" width="52" height="52">
+      <span class="brand__name">Daniela Yañez</span>
+    </a>
+    <nav class="nav__links" aria-label="Secciones del sistema">
+      <a href="#colores">Colores</a>
+      <a href="#tipografia">Tipografía</a>
+      <a href="#layout">Layout</a>
+      <a href="#profundidad">Profundidad</a>
+      <a href="#formas">Formas</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#reglas">Reglas</a>
+    </nav>
+    <a href="index.html" class="btn btn--primary btn--sm">Ver landing</a>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+
+    <!-- ============ Portada ============ -->
+    <section class="intro wrap">
+      <p class="label">Referencia visual · v1</p>
+      <h1 class="display intro__title">Sistema<br>de diseño</h1>
+      <p class="lead">La identidad de mi landing de CV y portafolio: azules de marca, Liquid Aurora Gradients, Capsule + Plus Jakarta Sans y formas de cápsula. Los tokens viven en <a href="DESIGN.md">DESIGN.md</a>.</p>
+    </section>
+
+    <!-- ============ 1 · Personalidad ============ -->
+    <section class="block wrap" id="personalidad" aria-labelledby="t-personalidad">
+      <p class="label">01</p>
+      <h2 class="display block__title" id="t-personalidad">Personalidad</h2>
+      <div class="cols">
+        <p>La personalidad de mi marca es vibrante, auténtica y visualmente atractiva. Tiene una presencia que merece ser vista, pero que no necesita recurrir al exceso para destacar. Se caracteriza por sus matices, contrastes y una estética cuidadosamente equilibrada, donde cada elemento tiene un propósito y un lugar.</p>
+        <p>Es expresiva y tiene carácter, pero no es estridente ni caótica. Busca una armonía visual en la que la fuerza estética convive con el orden y la claridad. Se dirige a personas que disfrutan de una estética Y2K reinterpretada desde una perspectiva contemporánea.</p>
+      </div>
+      <ul class="pills" aria-label="Rasgos">
+        <li>Vibrante</li><li>Auténtica</li><li>Equilibrada</li><li>Y2K contemporánea</li>
+      </ul>
+    </section>
+
+    <!-- ============ 2 · Colores ============ -->
+    <section class="block wrap" id="colores" aria-labelledby="t-colores">
+      <p class="label">02</p>
+      <h2 class="display block__title" id="t-colores">Colores</h2>
+      <p class="block__intro">El azul eléctrico es el principal distintivo, seguido del azul rey. A partir de ellos se construye una paleta luminosa, sin tonos fosforescentes, que se mezcla en paletas análogas dentro de los Liquid Aurora Gradients.</p>
+
+      <h3 class="sub">Azules de marca</h3>
+      <div class="swatches swatches--lg">
+        <figure class="swatch" style="--c:#2B59FF"><span class="swatch__chip"></span><figcaption><b>Azul eléctrico</b><code>#2B59FF</code><span>CTA, acentos, enlaces y punto de partida de los degradados.</span></figcaption></figure>
+        <figure class="swatch" style="--c:#1E3BB3"><span class="swatch__chip"></span><figcaption><b>Azul rey</b><code>#1E3BB3</code><span>Peso y profundidad; la parte oscura de los degradados.</span></figcaption></figure>
+      </div>
+
+      <h3 class="sub">Neutros base</h3>
+      <div class="swatches">
+        <figure class="swatch" style="--c:#0A0A10"><span class="swatch__chip"></span><figcaption><b>Negro profundo</b><code>#0A0A10</code><span>Texto sobre claro y fondo oscuro.</span></figcaption></figure>
+        <figure class="swatch" style="--c:#FFFFFF"><span class="swatch__chip swatch__chip--line"></span><figcaption><b>Blanco</b><code>#FFFFFF</code><span>Texto sobre oscuro y hover de botones.</span></figcaption></figure>
+      </div>
+
+      <h3 class="sub">Colores aurora</h3>
+      <div class="swatches swatches--sm">
+        <figure class="swatch" style="--c:#8FB4FF"><span class="swatch__chip"></span><figcaption><b>Azul cielo</b><code>#8FB4FF</code></figcaption></figure>
+        <figure class="swatch" style="--c:#5CCBF0"><span class="swatch__chip"></span><figcaption><b>Cian aurora</b><code>#5CCBF0</code></figcaption></figure>
+        <figure class="swatch" style="--c:#7B5CFF"><span class="swatch__chip"></span><figcaption><b>Violeta</b><code>#7B5CFF</code></figcaption></figure>
+        <figure class="swatch" style="--c:#BBA9FF"><span class="swatch__chip"></span><figcaption><b>Lavanda</b><code>#BBA9FF</code></figcaption></figure>
+        <figure class="swatch" style="--c:#E557A8"><span class="swatch__chip"></span><figcaption><b>Rosa orquídea</b><code>#E557A8</code></figcaption></figure>
+        <figure class="swatch" style="--c:#F6A9CF"><span class="swatch__chip"></span><figcaption><b>Rosa suave</b><code>#F6A9CF</code></figcaption></figure>
+        <figure class="swatch" style="--c:#B9E25E"><span class="swatch__chip"></span><figcaption><b>Verde lima</b><code>#B9E25E</code></figcaption></figure>
+        <figure class="swatch" style="--c:#FF8466"><span class="swatch__chip"></span><figcaption><b>Coral</b><code>#FF8466</code></figcaption></figure>
+      </div>
+
+      <h3 class="sub">Liquid Aurora Gradients</h3>
+      <p class="note">Cada sección de la landing cambia la aurora del fondo: siempre cuatro colores, siempre con uno de mis azules.</p>
+      <div class="auroras">
+        <figure class="aurora-card" style="--a1:#1E3BB3;--a2:#2B59FF;--a3:#7B5CFF;--a4:#5CCBF0"><span></span><figcaption>Inicio</figcaption></figure>
+        <figure class="aurora-card" style="--a1:#2B59FF;--a2:#BBA9FF;--a3:#E557A8;--a4:#5CCBF0"><span></span><figcaption>Sobre mí</figcaption></figure>
+        <figure class="aurora-card" style="--a1:#2B59FF;--a2:#FF8466;--a3:#7B5CFF;--a4:#E557A8"><span></span><figcaption>Disciplinas</figcaption></figure>
+        <figure class="aurora-card" style="--a1:#1E3BB3;--a2:#7B5CFF;--a3:#2B59FF;--a4:#5CCBF0"><span></span><figcaption>Herramientas</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ============ 3 · Tipografía ============ -->
+    <section class="block wrap" id="tipografia" aria-labelledby="t-tipografia">
+      <p class="label">03</p>
+      <h2 class="display block__title" id="t-tipografia">Tipografía</h2>
+      <div class="fonts">
+        <article class="font-card glass">
+          <p class="label">Display · Adobe Fonts</p>
+          <p class="font-card__sample display">Capsule</p>
+          <p class="font-card__abc display">Aa Bb Cc 123 ¿?</p>
+          <p>Carácter redondeado, suave y contundente. Un solo peso, Regular, con tracking de −1 %, solo en títulos grandes.</p>
+        </article>
+        <article class="font-card glass">
+          <p class="label">Texto · Google Fonts</p>
+          <p class="font-card__sample font-card__sample--jakarta">Plus Jakarta Sans</p>
+          <p class="font-card__weights"><span style="font-weight:700">Bold 700</span><span style="font-weight:600">SemiBold 600</span><span style="font-weight:500">Medium 500</span><span style="font-weight:400">Regular 400</span></p>
+          <p>Claridad, orden y legibilidad para subtítulos, textos e interfaz.</p>
+        </article>
+      </div>
+
+      <h3 class="sub">Escala</h3>
+      <div class="scale" role="list">
+        <div class="scale__row" role="listitem"><span class="scale__meta">Inicio · Capsule · hasta 280 px / ~96 px móvil · 0.82</span><span class="display scale__demo scale__demo--hero">PORT</span></div>
+        <div class="scale__row" role="listitem"><span class="scale__meta">Título de sección · Capsule · 64 / 40 px · 1.05</span><span class="display scale__demo" style="font-size:clamp(40px,5vw,64px)">Mi forma de diseñar</span></div>
+        <div class="scale__row" role="listitem"><span class="scale__meta">Nombre y profesión · Bold 700 · 28 / 20 px · 1.25</span><span class="scale__demo" style="font-weight:700;font-size:clamp(20px,2vw,28px);line-height:1.25">Diseñadora Gráfica Digital</span></div>
+        <div class="scale__row" role="listitem"><span class="scale__meta">Subtítulo · SemiBold 600 · 22 / 20 px · 1.3</span><span class="scale__demo" style="font-weight:600;font-size:clamp(20px,1.6vw,22px);line-height:1.3">Paleta cromática</span></div>
+        <div class="scale__row" role="listitem"><span class="scale__meta">Botón · SemiBold 600 · 16 / 15 px · +2 %</span><span class="scale__demo" style="font-weight:600;font-size:16px;letter-spacing:.02em">Ver mi trabajo</span></div>
+        <div class="scale__row" role="listitem"><span class="scale__meta">Texto destacado · Medium 500 · 20 / 18 px · 1.5</span><span class="scale__demo" style="font-weight:500;font-size:clamp(18px,1.5vw,20px);line-height:1.5">Diseño a partir del doble diamante.</span></div>
+        <div class="scale__row" role="listitem"><span class="scale__meta">Navegación · Medium 500 · 15 px · 1.2</span><span class="scale__demo" style="font-weight:500;font-size:15px">Sobre mí · Herramientas · Trabajo · Contacto</span></div>
+        <div class="scale__row" role="listitem"><span class="scale__meta">Etiqueta · Medium 500 · 13 / 12 px · +8 %</span><span class="scale__demo label" style="margin:0">Identidad de marca – 2025</span></div>
+        <div class="scale__row" role="listitem"><span class="scale__meta">Cuerpo · Regular 400 · 16 px · 1.6</span><span class="scale__demo" style="font-size:16px;line-height:1.6">Me considero una persona proactiva y responsable, apasionada por el diseño.</span></div>
+      </div>
+    </section>
+
+    <!-- ============ 4 · Layout ============ -->
+    <section class="block wrap" id="layout" aria-labelledby="t-layout">
+      <p class="label">04</p>
+      <h2 class="display block__title" id="t-layout">Layout</h2>
+      <p class="block__intro">Escala de 4 px inspirada en Fibonacci. Retícula de 12 columnas con medianiles de 24 px, ancho máximo de 1280 px y márgenes de 64 px.</p>
+      <div class="spacing">
+        <div class="spacing__row"><span class="spacing__bar" style="width:4px"></span><code>4</code><span>Ícono y texto</span></div>
+        <div class="spacing__row"><span class="spacing__bar" style="width:8px"></span><code>8</code><span>Dentro de un componente</span></div>
+        <div class="spacing__row"><span class="spacing__bar" style="width:12px"></span><code>12</code><span>Dentro de un componente</span></div>
+        <div class="spacing__row"><span class="spacing__bar" style="width:20px"></span><code>20</code><span>Interior de tarjetas</span></div>
+        <div class="spacing__row"><span class="spacing__bar" style="width:32px"></span><code>32</code><span>Grupos de contenido</span></div>
+        <div class="spacing__row"><span class="spacing__bar" style="width:52px"></span><code>52</code><span>Bloques · entre secciones en móvil</span></div>
+        <div class="spacing__row"><span class="spacing__bar" style="width:84px"></span><code>84</code><span>Bloques grandes</span></div>
+        <div class="spacing__row"><span class="spacing__bar" style="width:144px"></span><code>144</code><span>Entre secciones en escritorio</span></div>
+      </div>
+      <h3 class="sub">Retícula</h3>
+      <div class="grid-demo" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Comportamiento responsivo</caption>
+          <thead><tr><th scope="col">Formato</th><th scope="col">Rango</th><th scope="col">Retícula</th><th scope="col">Márgenes</th><th scope="col">Entre secciones</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Escritorio</th><td>1024 px en adelante</td><td>12 col · 24 px</td><td>64 px</td><td>144 px</td></tr>
+            <tr><th scope="row">Móvil</th><td>hasta 1023 px</td><td>4 col · 16 px</td><td>20 px</td><td>52 px</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 5 · Profundidad ============ -->
+    <section class="block wrap" id="profundidad" aria-labelledby="t-profundidad">
+      <p class="label">05</p>
+      <h2 class="display block__title" id="t-profundidad">Profundidad</h2>
+      <p class="block__intro">La profundidad viene de la luz y el color.</p>
+      <div class="depth">
+        <div class="depth__card depth__card--plano"><b>Plano</b><span>Sin efectos. Texto, fondos y elementos en reposo.</span></div>
+        <div class="depth__card depth__card--cristal"><b>Cristal</b><span>Blanco al 10 %, desenfoque de 20 px y borde de 1 px al 20 %.</span></div>
+        <div class="depth__card depth__card--resplandor"><b>Resplandor</b><span>0 12px 40px azul eléctrico al 35 %. Hover de cápsulas.</span></div>
+        <div class="depth__card depth__card--aurora"><b>Aurora</b><span>Degradados de fondo con profundidad atmosférica.</span></div>
+      </div>
+    </section>
+
+    <!-- ============ 6 · Formas ============ -->
+    <section class="block wrap" id="formas" aria-labelledby="t-formas">
+      <p class="label">06</p>
+      <h2 class="display block__title" id="t-formas">Formas</h2>
+      <p class="block__intro">Redondeadas y suaves, en unidad con Capsule.</p>
+      <div class="shapes">
+        <figure><span class="shape" style="border-radius:999px;width:84px;height:140px"></span><figcaption><b>999 px</b>Botones, etiquetas y cápsulas</figcaption></figure>
+        <figure><span class="shape" style="border-radius:28px"></span><figcaption><b>20–28 px</b>Imágenes y paneles de proyecto</figcaption></figure>
+        <figure><span class="shape" style="border-radius:24px"></span><figcaption><b>24 px</b>Contenedores grandes</figcaption></figure>
+        <figure><span class="shape" style="border-radius:14px"></span><figcaption><b>14 px</b>Campos · paneles en móvil</figcaption></figure>
+      </div>
+      <div class="motif glass">
+        <div class="motif__stage"><img src="assets/img/conejito-rosa.svg" alt="Conejito rosa sobre una flor, motivo gráfico de la marca" width="160" height="160"></div>
+        <div>
+          <h3 class="sub">Motivo gráfico</h3>
+          <p>Un conejito sobre una flor en estilo abstracto, en líneas finas rosas (<code>#FFA4D0</code>) con destellos. Va sin fondo y con un brillo rosa suave: en la navegación, en el footer —donde funciona como botón para volver al inicio— y como favicon.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7 · Componentes ============ -->
+    <section class="block wrap" id="componentes" aria-labelledby="t-componentes">
+      <p class="label">07</p>
+      <h2 class="display block__title" id="t-componentes">Componentes</h2>
+      <p class="block__intro">Los componentes viven sobre la landing oscura, así que aquí se muestran en un escenario con su aurora. Pasa el mouse sobre ellos para ver sus estados.</p>
+
+      <div class="stage">
+        <div class="stage__row">
+          <div class="spec"><p class="spec__name">Botón principal</p><a href="#componentes" class="btn btn--primary">Ver mi trabajo</a></div>
+          <div class="spec"><p class="spec__name">Botón secundario</p><a href="#componentes" class="btn btn--secondary">Volver al trabajo</a></div>
+          <div class="spec"><p class="spec__name">Deshabilitado</p><button class="btn btn--primary" disabled>Enviar</button></div>
+        </div>
+        <div class="stage__row">
+          <div class="spec spec--wide">
+            <p class="spec__name">Barra de navegación · 72 px</p>
+            <div class="mock-nav">
+              <span class="mock-nav__brand"><img src="assets/img/conejito-rosa.svg" alt="" width="40" height="40">Daniela Yañez</span>
+              <span class="mock-nav__links"><span>Sobre mí</span><span>Herramientas</span><span class="is-active">Trabajo</span><span>Contacto</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="stage__row stage__row--top">
+          <div class="spec">
+            <p class="spec__name">Cápsula de proyecto</p>
+            <button class="capsule" type="button" style="--c1:#7A2A06;--c2:#EF6A00;--c3:#C2410C" aria-label="Ejemplo de cápsula de proyecto">
+              <span class="capsule__brand"><span class="capsule__word">Proyecto</span></span>
+              <span class="capsule__info">Categoría – 2026</span>
+            </button>
+          </div>
+          <div class="spec">
+            <p class="spec__name">Etiquetas de filtro</p>
+            <div class="chips"><button class="chip" aria-pressed="true" type="button">Todo</button><button class="chip" type="button">Identidad</button><button class="chip" type="button">3D</button><button class="chip" type="button">Empaque</button></div>
+            <p class="spec__name">Etiquetas de intereses</p>
+            <ul class="tags"><li class="tag" style="--tag:#6A4BE8">Moda</li><li class="tag" style="--tag:#C93D8C">Make-up</li><li class="tag" style="--tag:#1C7FB0">Música</li><li class="tag" style="--tag:#5A8A12">Color</li></ul>
+            <p class="spec__name">Íconos sociales</p>
+            <div class="socials">
+              <span class="social" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+              <span class="social social--text" aria-label="Behance">Bē</span>
+            </div>
+          </div>
+          <div class="spec">
+            <p class="spec__name">Campo de formulario</p>
+            <form class="mock-form glass" onsubmit="return false">
+              <label class="field"><span>Nombre</span><input type="text" placeholder="Tu nombre"></label>
+              <label class="field"><span>Correo</span><input type="email" placeholder="nombre@correo.com"></label>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Especificaciones de componentes</caption>
+          <thead><tr><th scope="col">Componente</th><th scope="col">Especificación</th><th scope="col">Estados</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Botón principal</th><td>#2B59FF, texto blanco, borde 1.5 px, 48 px de alto, 14 × 28 px, cápsula, SemiBold 16 px</td><td>Hover: blanco con texto azul y escala 1.05 en 0.25 s · Presionado: escala 1 · Deshabilitado: negro</td></tr>
+            <tr><th scope="row">Botón secundario</th><td>Contorno blanco 1.5 px, fondo transparente, texto blanco</td><td>Hover igual que el principal</td></tr>
+            <tr><th scope="row">Navegación</th><td>72 px, conejito y nombre a la izquierda, enlaces Medium 15 px</td><td>Cristal al hacer scroll · punto azul en la sección activa</td></tr>
+            <tr><th scope="row">Cápsula de proyecto</th><td>200 px (160 px en móvil), logotipo sobre su aurora, borde blanco 1 px translúcido</td><td>Hover: 260 px, resplandor, categoría y año</td></tr>
+            <tr><th scope="row">Filtros</th><td>40 px (48 px en móvil), contorno blanco, Medium 12 px en mayúsculas</td><td>Activo: blanco con texto azul rey</td></tr>
+            <tr><th scope="row">Campos</th><td>Blanco, borde 1.5 px azul cielo, radio 14 px, 52 px de alto</td><td>Foco: borde azul eléctrico con resplandor suave</td></tr>
+            <tr><th scope="row">Íconos sociales</th><td>Círculo 44 px (48 px en móvil), contorno azul eléctrico, ícono azul cielo</td><td>Hover: relleno azul, ícono blanco</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 8 · Reglas ============ -->
+    <section class="block wrap" id="reglas" aria-labelledby="t-reglas">
+      <p class="label">08</p>
+      <h2 class="display block__title" id="t-reglas">Reglas</h2>
+      <div class="rules">
+        <div class="rules__col glass">
+          <h3 class="sub rules__si">Sí</h3>
+          <ul>
+            <li>El azul eléctrico manda en todas las acciones importantes.</li>
+            <li>Los degradados se arman con colores análogos y tienen uno de mis dos azules.</li>
+            <li>El texto va en blanco o en negro profundo, según el fondo.</li>
+            <li>Capsule solo va en títulos grandes, uno por sección.</li>
+            <li>El espacio en blanco respira alrededor de los degradados.</li>
+            <li>Formas de cápsula y redondeos suaves en todos los componentes.</li>
+            <li>Con “reducir movimiento” activado, los degradados dejan de animarse.</li>
+          </ul>
+        </div>
+        <div class="rules__col glass">
+          <h3 class="sub rules__no">No</h3>
+          <ul>
+            <li>Nada de colores fosforescentes ni súper saturados.</li>
+            <li>No se pone texto sobre un degradado con zonas muy claras y muy oscuras a la vez.</li>
+            <li>Un mismo degradado no lleva más de cuatro colores.</li>
+            <li>No van dos elementos con resplandor uno junto al otro.</li>
+            <li>Los componentes interactivos no llevan esquinas rectas.</li>
+            <li>Los colores aurora no se usan para texto corrido; solo como acento.</li>
+            <li>No compiten varias animaciones protagonistas en la misma pantalla.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p>Daniela Yañez · Diseñadora Gráfica Digital</p>
+      <p class="footer__links"><a href="index.html">Landing</a><span aria-hidden="true">·</span><a href="DESIGN.md">DESIGN.md</a><span aria-hidden="true">·</span><a href="CV.md">CV.md</a></p>
+    </div>
+  </footer>
+</body>
+</html>
